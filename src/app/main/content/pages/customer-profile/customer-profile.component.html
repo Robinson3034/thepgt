@@ -1,0 +1,548 @@
+<!-- <mat-toolbar color="primary">
+  Customer Profile Creation
+</mat-toolbar> -->
+<!-- <div class="fedex-PriNavbar">
+  <nav class="navbar navbar-default">
+    <ul class="nav justify-content-center">
+      <li class="nav-item" id="1" class="active">
+        <a tabindex="0">Customer Profile Creation</a>
+      </li>
+      <li class="nav-item" id="1" class="active">
+        <a tabindex="0">Search</a>
+      </li>
+      <li class="nav-item" id="1" class="active">
+        <a tabindex="0">History</a>
+      </li>
+    </ul>
+  </nav>
+</div> -->
+<div class="container1">
+  <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+  <form class="example-form" [formGroup]="customerProfileForm" novalidate>
+    <p-panel>
+      <p-header class="fedex-heading">
+        <div class="ui-helper-clearfix">
+          <span class="ui-panel-title">Customer Profile</span>
+          <!-- <p-splitButton [style]="{'float':'right'}" label="Save" icon="pi pi-check" (onClick)="save()" [model]="items"></p-splitButton> -->
+        </div>
+      </p-header>
+      <div class="container">
+        <!-- <span class="ui-float-label">
+        <input id="float-input" type="text" size="30" pInputText>
+        <label for="float-input">Username</label>
+      </span> -->
+        <div class="p-grid" style="margin:0 0 20px 0">
+          <div class="p-col">
+            <mat-form-field>
+              <mat-select placeholder="Role" formControlName="role">
+                <mat-option *ngFor="let roledata of masterData.role" [value]="roledata">
+                  {{roledata}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="p-col">
+            <mat-form-field>
+              <mat-select placeholder="Customer Type" formControlName="customerType">
+                <mat-option *ngFor="let custypedata of masterData.customerType" [value]="custypedata">
+                  {{custypedata}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <p-panel [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}" formGroupName="primaryDetails">
+          <p-header class="fedex-heading">
+            Primary Details
+          </p-header>
+          <div class="p-grid">
+            <div class="p-col" *ngIf="metaData['name_1']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['name_1']['fieldDescription']}}" formControlName="name"
+                  [required]="metaData['name_1']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.name').valid && customerProfileForm.get('primaryDetails.name').touched">
+                  {{metaData['name_1']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['city_3']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['city_3']['fieldDescription']}}" formControlName="city"
+                  [required]="metaData['city_3']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.city').valid && customerProfileForm.get('primaryDetails.city').touched">
+                  {{metaData['city_3']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['state_4']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['state_4']['fieldDescription']}}" formControlName="state"
+                  [required]="metaData['state_4']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.state').valid && customerProfileForm.get('primaryDetails.state').touched">
+                  {{metaData['state_4']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+          </div>
+          <!-- <div class="p-col">
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Leave a comment"></textarea>
+            </mat-form-field>
+          </div> -->
+          <div class="p-grid">
+            <div class="p-col" *ngIf="metaData['country_5']['isVisible']">
+
+              <mat-form-field class="example-full-width">
+                <mat-select placeholder="{{metaData['country_5']['fieldDescription']}}" formControlName="country"
+                  [required]="metaData['country_5']['isMandatory']">
+                  <mat-option *ngFor="let countrydata of masterData.country" [value]="countrydata">
+                    {{countrydata}}
+                  </mat-option>
+                </mat-select>
+                <!-- <input matInput placeholder="Country" formControlName="country"> -->
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.country').valid && customerProfileForm.get('primaryDetails.country').touched">
+                  {{metaData['country_5']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['zip_6']['isVisible']">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{metaData['zip_6']['fieldDescription']}}" formControlName="zip"
+                  [required]="metaData['zip_6']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.zip').valid && customerProfileForm.get('primaryDetails.zip').touched">
+                  {{metaData['zip_6']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['phone_8']['isVisible']">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="{{metaData['phone_8']['fieldDescription']}}" formControlName="phone"
+                  [required]="metaData['phone_8']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.phone').valid && customerProfileForm.get('primaryDetails.phone').touched">
+                  {{metaData['phone_8']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+          </div>
+          <div class="p-grid">
+            <div class="p-col" *ngIf="metaData['fax_9']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['fax_9']['fieldDescription']}}" formControlName="fax"
+                  [required]="metaData['fax_9']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.fax').valid && customerProfileForm.get('primaryDetails.fax').touched">
+                  {{metaData['fax_9']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['email_10']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['email_10']['fieldDescription']}}" formControlName="email"
+                  [required]="metaData['email_10']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.email').valid && customerProfileForm.get('primaryDetails.email').touched">
+                  {{metaData['email_10']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['url_11']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['url_11']['fieldDescription']}}" formControlName="url"
+                  [required]="metaData['url_11']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.url').valid && customerProfileForm.get('primaryDetails.url').touched">
+                  {{metaData['url_11']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+          </div>
+          <div class="p-grid">
+            <div class="p-col" *ngIf="metaData['address_2']['isVisible']">
+              <mat-form-field>
+                <textarea matInput placeholder="{{metaData['address_2']['fieldDescription']}}" formControlName="address"
+                  [required]="metaData['address_2']['isMandatory']"></textarea>
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.address').valid && customerProfileForm.get('primaryDetails.address').touched">
+                  {{metaData['address_2']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+          </div>
+          <hr style="border-top: dotted 1px #bbb;margin:0;margin-bottom: 10px;" />
+          <div class="p-grid">
+            <div class="p-col" *ngIf="metaData['fedexAccount_12']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['fedexAccount_12']['fieldDescription']}}" formControlName="fedexAccount"
+                  [required]="metaData['fedexAccount_12']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.fedexAccount').valid && customerProfileForm.get('primaryDetails.fedexAccount').touched">
+                  {{metaData['fedexAccount_12']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+            <div class="p-col" *ngIf="metaData['creditStat_13']['isVisible']">
+              <mat-form-field>
+                <input matInput placeholder="{{metaData['creditStat_13']['fieldDescription']}}" formControlName="creditStat"
+                  [required]="metaData['creditStat_13']['isMandatory']">
+              </mat-form-field>
+              <mat-error>
+                <span style="margin-top:-15px;position: absolute" *ngIf="!customerProfileForm.get('primaryDetails.creditStat').valid && customerProfileForm.get('primaryDetails.creditStat').touched">
+                  {{metaData['creditStat_13']['fieldDescription'] + ' is Required'}}
+                </span>
+              </mat-error>
+            </div>
+          </div>
+        </p-panel>
+
+        <!-- <p-panel header="Country Specific" [toggleable]="true" toggler="header" formGroupName="countrySpecific" [style]="{'margin-bottom':'10px'}">
+          ccid: [''],
+          abn: [''],
+          cac: [''],
+          bsb: [''] 
+      </p-panel>-->
+
+        <p-panel header="Contact Information" [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}">
+          <i class="pi pi-times-circle fedex-ico" (click)="removeFromList(1)"></i>
+          <i class="pi pi-plus-circle fedex-ico" (click)="showModal(1)"></i>
+          <p-tabView [(activeIndex)]="indexval">
+            <p-tabPanel header="Primary Contact">
+              <p-table [columns]="colsPrimaryandBilling" [value]="this.customerProfileForm.get('primaryContactList').value"
+                selectionMode="multiple" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                [(selection)]="selectedContactInfo" [paginator]="false">
+
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 3em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns">
+                      {{col.header}}
+                      <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex">
+                  <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex">
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+
+              </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Billing Contact">
+              <p-table [columns]="colsPrimaryandBilling" [value]="this.customerProfileForm.get('billContactList').value"
+                selectionMode="multiple" [(selection)]="selectedBillingContacts" (onRowSelect)="onRowSelect($event)"
+                [paginator]="false">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 3em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns">
+                      {{col.header}}
+                      <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </p-tabPanel>
+          </p-tabView>
+        </p-panel>
+        <p-panel header="Instruction" [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}">
+          <i class="pi pi-times-circle fedex-ico" (click)="removeFromList(3)"></i>
+          <i class="pi pi-plus-circle fedex-ico" (click)="showModal(3)"></i>
+          <p-tabView>
+            <p-tabPanel header="Primary">
+              <p-table [columns]="colsPrimaryInstruction" [value]="this.customerProfileForm.get('primaryInstructionList').value"
+                selectionMode="multiple" [(selection)]="selectedprimaryInstructions" (onRowSelect)="onRowSelect($event)"
+                [paginator]="false">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 3em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns">
+                      {{col.header}}
+                      <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+
+              </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Free Text">
+              <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Leave a comment" formControlName="freetextinstruction"></textarea>
+              </mat-form-field>
+            </p-tabPanel>
+          </p-tabView>
+        </p-panel>
+        <p-panel header="Notification" [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}">
+
+          <i class="pi pi-times-circle fedex-ico" (click)="removeFromList(4)"></i>
+          <i class="pi pi-plus-circle fedex-ico" (click)="showModal(4)"></i>
+          <p-table [columns]="colsNotification" [value]="this.customerProfileForm.get('notificationList').value"
+            selectionMode="multiple" [(selection)]="selectednotificationLists" 
+            [paginator]="false">
+
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th style="width:50px">
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th *ngFor="let col of columns">
+                  {{col.header}}
+                  <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData">
+                <td>
+                  <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                </td>
+                <td *ngFor="let col of columns">
+                  {{rowData[col.field]}}
+                </td>
+              </tr>
+            </ng-template>
+
+          </p-table>
+        </p-panel>
+        <!-- <p-panel header="Billing" [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}">
+        <i class="pi pi-times-circle fedex-ico"></i>
+        <i class="pi pi-plus-circle fedex-ico"></i>
+        <p-table [columns]="colsBilling" [value]="cars" selectionMode="single" [(selection)]="selectedCar"
+          (onRowSelect)="onRowSelect($event)" [paginator]="false">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </p-panel> -->
+        <!-- <p-panel header="Image" [toggleable]="true" toggler="header" [style]="{'margin-bottom':'10px'}">
+        <i class="pi pi-times-circle fedex-ico"></i>
+        <i class="pi pi-plus-circle fedex-ico"></i>
+        <p-table [columns]="colsImage" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)"
+          [paginator]="false">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{col.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr [pSelectableRow]="rowData">
+              <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </p-panel> -->
+      </div>
+      <p-footer>
+        <div style="text-align:right">
+          <button pButton type="button" label="Save" (click)="createCustomerProfile();" style="margin-right: .25em"></button>
+          <!-- <button pButton type="button" label="Save & Exist" class="ui-button-success" style="margin-right: .25em"></button> -->
+          <button pButton type="button" label="Reset" style="margin-right: .25em" (click)="resetCustomerProfile();"></button>
+          <button pButton type="button" label="Cancel" style="margin-right: .25em" (click)="cancelCustomerProfile();"></button>
+        </div>
+      </p-footer>
+    </p-panel>
+  </form>
+  <pre style="color:#fff">Check Form is Valid {{this.customerProfileForm.valid }}</pre>
+  <pre style="color:#fff">{{this.customerProfileForm.getRawValue() | json}}</pre>
+</div>
+<!-- ----------------------------PopUp------------------- -->
+
+<!-- Primary Contact -->
+<p-dialog header="Primary Contact" [(visible)]="isPrimaryContactVisible" [modal]="true" [responsive]="true" [width]="350"
+  [minWidth]="400" [minY]="70" [maximizable]="true" [baseZIndex]="10000">
+  <form [formGroup]="primaryAndBillingContactForm">
+    <div class="p-grid">
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
+      </div>
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Dept" formControlName="dept">
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="p-grid">
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phone">
+        </mat-form-field>
+      </div>
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="EXT" formControlName="ext">
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="p-grid">
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Fax" formControlName="fax">
+        </mat-form-field>
+      </div>
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Mobile" formControlName="mobile">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col">
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+      </div>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="addtoList(1);" label="Yes"></button>
+      <button type="button" pButton icon="pi pi-close" style="color:#fff" (click)="isPrimaryContactVisible=false" label="No"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+
+<!-- Bill Contact -->
+<!-- Primary Instruction -->
+<p-dialog header="Primary Instruction" [(visible)]="isPrimryInstVisible" [modal]="true" [responsive]="true" [width]="350"
+  [minWidth]="400" [minY]="70" [maximizable]="true" [baseZIndex]="0">
+  <form [formGroup]="primaryInstructionForm">
+    <div class="p-grid">
+      <mat-form-field>
+        <mat-select placeholder="Type Code" formControlName="typeCode" (selectionChange)="changedropdown(1);">
+          <mat-option *ngFor="let typedata of masterData.instruction" [value]="typedata.typeCode">
+            {{typedata.typeCode}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Type Description" formControlName="typeDesc">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Leave a comment" formControlName="comment"></textarea>
+      </mat-form-field>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="addtoList(3);" label="Yes"></button>
+      <button type="button" pButton icon="pi pi-close" style="color:#fff" (click)="isPrimryInstVisible=false" label="No"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+<!-- Notification -->
+<p-dialog header="Notification" [(visible)]="isNotificationVisible" [modal]="true" [responsive]="true" [width]="350"
+  [minWidth]="400" [minY]="70" [maximizable]="true" [baseZIndex]="0">
+  <form [formGroup]="notificationListForm">
+    <div class="p-grid">
+      <mat-form-field>
+        <mat-select placeholder="Notification Type Name" formControlName="notifyTypeName" (selectionChange)="changedropdown(2);">
+          <mat-option *ngFor="let notifidata of masterData.notification" [value]="notifidata.notifyTypeName">
+            {{notifidata.notifyTypeName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Template" formControlName="template">
+          <mat-option *ngFor="let tempdata of masterData.template" [value]="tempdata">
+            {{tempdata}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Method" formControlName="method">
+          <mat-option *ngFor="let methoddata of masterData.method" [value]="methoddata">
+            {{methoddata}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Primary Contact" formControlName="primaryContact">
+          <mat-option *ngFor="let primarycontactdata of PrimaryContactsName" [value]="primarycontactdata">
+            {{primarycontactdata}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Bill Contact" formControlName="billContact">
+          <mat-option *ngFor="let billingcontactdata of BillingContactsName" [value]="billingcontactdata">
+            {{billingcontactdata}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="pi pi-check" (click)="addtoList(4);" label="Yes"></button>
+      <button type="button" pButton icon="pi pi-close" style="color:#fff" (click)="isNotificationVisible=false" label="No"
+        class="ui-button-secondary"></button>
+    </p-footer>
+  </form>
+</p-dialog>
+<!-- Billing -->
+
+<!-- Image -->

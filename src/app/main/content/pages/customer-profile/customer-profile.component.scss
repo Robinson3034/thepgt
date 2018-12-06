@@ -1,0 +1,66 @@
+mat-form-field {
+  width: 100%;
+}
+.ui-table {
+  clear: both !important;
+}
+.ui-table-tbody .ui-chkbox {
+  pointer-events: none !important;
+}
+.container1 {
+  width: 1200px !important;
+  margin: 0 auto;
+}
+body {
+  background: #1c2833;
+}
+.mat-form-field-appearance-legacy,
+.mat-form-field-label {
+  color: #1c2833 !important;
+}
+.fedex-ico {
+  font-size: 2.5em !important;
+  float: right;
+  color: #4d148c;
+}
+body .ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-left .ui-tabview-nav li.ui-state-active,
+body .ui-tabview.ui-tabview-right .ui-tabview-nav li.ui-state-active {
+  background-color: #4d148c !important;
+  border: 1px solid #4d148c !important;
+}
+.fedex-heading,
+.ui-panel-title {
+  color: #4d148c !important;
+  font-size: 16px !important;
+  // display: inline-block;
+  margin-top: 2px !important;
+  font-weight: 400 !important;
+}
+.pi-minus:before {
+  content: "\21E7"; // 02C4
+}
+.pi-plus:before {
+  content: "\21E9";
+}
+.pi {
+  // color: #4d148c;
+  cursor: pointer !important;
+}
+body .ui-button {
+  background-color: #4d148c !important;
+}
+.ui-widget-overlay,
+.ui-dialog-mask {
+  z-index: 1000 !important;
+}
+
+.ui-dialog.ui-widget.ui-shadow.ui-dialog-draggable {
+  z-index: 1001 !important;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 1002 !important;
+}
